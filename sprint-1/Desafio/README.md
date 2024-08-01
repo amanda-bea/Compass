@@ -1,8 +1,10 @@
-# Etapas
+## Etapas
 
-1.entrega
+1. Entrega
 [Etapa I](etapa-1/entrega.txt)
 
+2. Pasta ecommerce **(com os scripts)**
+[ecommerce](etapa-1/ecommerce/)
 
-2.pasta ecommerce
-[ecommerce] (etapa-1/ecommerce/)
+3. Pasta vendas (gerada)
+[vendas](etapa-1/ecommerce/vendas/)

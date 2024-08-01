@@ -12,20 +12,16 @@ clear
 mkdir vendas
 cp dados_de_vendas.csv vendas
 cd vendas/
-cat dados_de_vendas.csv | cut -d"," -f5 >> auxiliar.txt
-#um arquivo auxiliar temporário é criado para receber apenas as datas das vendas, que são delimitadas no quinto campo do arquivo
-ANTIGA=$(cat auxiliar.txt | sort -k3 -t "/" -g | cat auxiliar.txt | sort -k3 -t "/" -g | sort -k2 -t "/" -g | grep -v "data" | head -n 1)
-#criação de variável, para melhor legibilidade, que armazena a data mais antiga a partir da ordenação do ano e mês
-#a exclusão da palavra "data" é feita para não ser considerada na ordenação
-RECENTE=$(cat auxiliar.txt | sort -k3 -t "/" -g | cat auxiliar.txt | sort -k3 -t "/" -g | sort -k2 -t "/" -g | grep -v "data" | tail -n 1)
-#a mesma ordenação é feita da mesma forma, mas dessa vez pega a última linha da ordenação
+RECENTE=$(cat dados_de_vendas.csv | tail -n 1 | cut -d"," -f5)
+#criação de variável, para melhor legibilidade, que armazena a data mais recente
+#o comando tail pega a última linha do arquivo, o cut divide a linha em campos para separar apenas a data
+ANTIGA=$(cat dados_de_vendas.csv | head -n 2 | tail -n 1 | cut -d"," -f5)
+#dessa vez pega a as duas primeiras linhas, e em sequida apenas a última linha das duas, já que a primeira linha do arquivo é de instrução
 ITENS=$(wc -l dados_de_vendas.csv | cut -c 1,2)
 #uma varíavel armazena o número de linhas, que indicam o número de itens vendidos
 #o cut pega apenas os dois primeiros caracteres para ser usado na contabilização posterior
 RESULTADO=$(expr $ITENS - 1)
 #o número de linhas é contabilizado - 1 por conta da primeira linha que é apenas de instrução
-rm auxiliar.txt
-#exclusão do arquivo temporário
 mv dados_de_vendas.csv "dados-$(date +%Y%m%d).csv"
 #renomeação do arquivo usando o comando date para atendar os critérios de data
 mkdir backup

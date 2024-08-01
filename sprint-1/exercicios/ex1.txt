@@ -1,3 +1,5 @@
+```shell
+
 #!/bin/bash
 
 ####################################################################################################################
@@ -14,12 +16,10 @@ clear
 mkdir vendas
 cp dados_de_vendas.csv vendas
 cd vendas/
-cat dados_de_vendas.csv | cut -d"," -f5 >> auxiliar.txt
-ANTIGA=$(cat auxiliar.txt | sort -k3 -t "/" -g | cat auxiliar.txt | sort -k3 -t "/" -g | sort -k2 -t "/" -g | grep -v "data" | head -n 1)
-RECENTE=$(cat auxiliar.txt | sort -k3 -t "/" -g | cat auxiliar.txt | sort -k3 -t "/" -g | sort -k2 -t "/" -g | grep -v "data" | tail -n 1)
+RECENTE=$(cat dados_de_vendas.csv | tail -n 1 | cut -d"," -f5)
+ANTIGA=$(cat dados_de_vendas.csv | head -n 2 | tail -n 1 | cut -d"," -f5)
 ITENS=$(wc -l dados_de_vendas.csv | cut -c 1,2)
 RESULTADO=$(expr $ITENS - 1)
-rm auxiliar.txt
 mv dados_de_vendas.csv "dados-$(date +%Y%m%d).csv"
 mkdir backup
 cp "dados-$(date +%Y%m%d).csv" backup
@@ -35,3 +35,4 @@ zip "backup-dados-$(date +%Y%m%d).zip" "backup-dados-$(date +%Y%m%d).csv"
 rm "backup-dados-$(date +%Y%m%d).csv"
 cd ../..
 rm dados_de_vendas.csv
+```

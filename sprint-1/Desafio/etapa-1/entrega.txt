@@ -1,3 +1,5 @@
+## Entregas e reexecução
+
 A pasta etapa-1 contém a pasta ecommerce criada na preparação para o desafio,
 à partir dela estão os scripts criados e a pasta vendas gerada pelo script processamento_de_vendas.
 
