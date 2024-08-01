@@ -13,10 +13,10 @@ O script apenas transfere os dados dos relatórios gerados no arquivo de relató
 
 ### Para reexecução:
 1. Desafio
-    1.1 Criar arquivo executável:
+    1. Criar arquivo executável:
         Dentro da pasta ecommerce no terminal, o usuário deve digitar comando **"./processamento_de_vendas"**. Para criá-lo, uma sequência de comandos baseado em linux devem ser seguidas para realizar o gerenciamento solicitado, com o auxílio de comandos como o date e variáveis que tornam o código mais legível. O relatório é gerado a partir de variáveis que armazenam os dados anteriormente e comandos baseados em linux.
-    1.2 Agendar a execução do processamento:
+    2. Agendar a execução do processamento:
         O agendamento é realizado com o auxílio do programa cron, que realiza comandos no período solicitado pelo usuário linux.
         Digitando o comando **"crontab -e"** no terminal o usuário pode escolher o horário, dia, frequência e o comando a ser executado. No nosso casso é necessário digitar, no editor de texto, **"27 15 * * 1-4 cd /home/amanda/Compass/sprint-1/Desafio/etapa-1/ecommerce/ && ./processamento_de_vendas.sh"**, considerando o agendamento no sistema local. Sem esquecer do comando **"chmod +x",** que dá a todos usuários a permissão de execução do script.
-    1.3 Criar novo relatório:
+    3. Criar novo relatório:
         Após pelo menos 3 relatórios gerados, na mesma pasta ecommerce executar o comando "./consolidador_de_processamento_de_vendas", que apenas faz a junção de todos os relatórios em um arquivo só, após isso poderá usar "cat relatorio_final.txt" para ler o relatório.
