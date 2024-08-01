@@ -1,7 +1,7 @@
 ## Etapas
 
 1. Entrega
-[Etapa I](etapa-1/entrega.txt)
+[Etapa I](etapa-1/entrega.md)
 
 2. Pasta ecommerce **(com os scripts)**
 [ecommerce](etapa-1/ecommerce/)

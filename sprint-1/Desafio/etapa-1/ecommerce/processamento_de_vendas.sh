@@ -38,8 +38,9 @@ echo $RECENTE >> "relatorio$(date +%d).txt"
 echo $RESULTADO >> "relatorio$(date +%d).txt"
 #concatenação das variáveis geradas anteriormente no relatório
 head -n 10 "backup-dados-$(date +%Y%m%d).csv" >> "relatorio$(date +%d).txt"
-#primeiras 10 linhas do arquivo de backup é concatenado
+#primeiras 10 linhas do arquivo de backup são concatenadas no relatório usando o head
 zip "backup-dados-$(date +%Y%m%d).zip" "backup-dados-$(date +%Y%m%d).csv"
+#coamando zip para compactar o arquivo de backup
 rm "backup-dados-$(date +%Y%m%d).csv"
 cd ../..
 rm dados_de_vendas.csv
