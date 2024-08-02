@@ -11,6 +11,10 @@ compacta os arquivo de backup dos dados).
 * consolidador_de_processamento_de_vendas:
 O script apenas transfere os dados dos relatórios gerados no arquivo de relatório final.
 
+* Evidências geradas:
+[Evidências][https://github.com/amanda-bea/Compass/tree/main/sprint-1/evidencias]
+
+
 ### Para reexecução:
 1. Desafio
     1. Criar arquivo executável:
