@@ -12,7 +12,7 @@ compacta os arquivo de backup dos dados).
 O script apenas transfere os dados dos relatórios gerados no arquivo de relatório final.
 
 * Evidências geradas:
-[Evidências][https://github.com/amanda-bea/Compass/tree/main/sprint-1/evidencias]
+[Evidências](https://github.com/amanda-bea/Compass/tree/main/sprint-1/evidencias)
 
 
 ### Para reexecução:
