@@ -15,9 +15,10 @@
 * Todos os scripts gerados em: [pasta ecommerce](Desafio/etapa-1/ecommerce/)
 * Evidências abaixo e em [Evidências](evidencias/)
 * Reexecução e mais informações em: [Entrega](Desafio/etapa-1/entrega.md)
+* Etapas em: [Desafio](Desafio/README.md)
+  
 
 # Evidências
-
 
 Ao executar o código do exercício observei que a saída no terminal informa a porcentagem de redução do tamanho do arquivo e após a primeira execução mostra que algumas pastas não podem ser criadas pois já existem, mas o resto do código segue com êxito, conforme podemos ver na imagem a seguir:
 Mais evidências e arquivos de dados gerados em: [Evidências](evidencias/)
