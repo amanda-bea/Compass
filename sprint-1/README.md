@@ -9,7 +9,7 @@
 [Resposta Ex2.](exercicios/ex2.md)
 
 
-# Desafio
+# Entregáveis
 
 * Todos os arquivos de vendas gerados em [Dados 1](evidencias/dados_de_vendas.csv), [Dados 2](evidencias/dados_de_vendas2.csv) e [Dados 3](evidencias/dados_de_vendas3.csv)
 * Todos os scripts gerados em: [pasta ecommerce](Desafio/etapa-1/ecommerce/)
