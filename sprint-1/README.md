@@ -9,6 +9,12 @@
 [Resposta Ex2.](exercicios/ex2.md)
 
 
+# Desafio
+
+* Todos os arquivos de vendas gerados em [Dados 1](evidencias/dados_de_vendas.csv), [Dados 2](evidencias/dados_de_vendas2.csv) e [Dados 3](evidencias/dados_de_vendas3.csv)
+* Todos os scripts gerados em: [pasta vendas](Desafio/etapa-1/ecommerce/vendas/)
+* Evidências abaixo e em [Evidências](evidencias/)
+* Reexecução e mais informações em: [Entrega](Desafio/etapa-1/entrega.md)
 
 # Evidências
 
@@ -31,7 +37,7 @@ Após o desencontro de informações refiz a primeira execução para arrumar os
 ![Final](evidencias/reexecução1.png)
 
 E o novo relatório final não possui mais erros de data.
-![Relatório](relatorio_fina.png)
+![Relatório](evidencias/relatorio_fina.png)
 
 Para fazer isso esses foram os scripts necessários, também disponível no formato txt em: [codigo1.txt](evidencias/codigo1.txt) e [codigo2.txt](evidencias/codigo2.txt)
 Também em formato Markdown em: [codigo1](exercicios/ex1.md) e [codigo2](exercicios/ex2.md)
