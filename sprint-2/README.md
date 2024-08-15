@@ -3,6 +3,7 @@
 * Pastas com arquivos das querys para a execução dos exercícios no formato PNG incluindo os resultados e arquivos de texto com os códigos usados
 
 [Biblioteca](exercicios/biblioteca/)
+
 [Loja](exercicios/loja/)
 
 
@@ -14,10 +15,11 @@
 
 1. Query
 
- A consulta foi feita no DBeaver com comandos básicos de sql e renomeação de colunas.
+  A consulta foi feita no DBeaver com comandos básicos de sql e renomeação de colunas.
+  
 2. Exportação
 
- A exportação foi feita pela interface gráfica do próorio DBeaver onde é possível escolher o formato do arquivo e caracter de separação.
+  A exportação foi feita pela interface gráfica do próorio DBeaver onde é possível escolher o formato do arquivo e caracter de separação.
 
 # README
 
