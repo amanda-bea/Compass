@@ -1,14 +1,21 @@
 # Desafio
 
-1. Normalização
-    1.1 Primeira Forma Normal
-        Na primeira forma normal separei a tabela inical em tabelas menores para separar os colunas que possuiam mais de um dado e aproveitei os formatos de data que já estavam separados em data e hora.
-    1.2 Segunda Forma Normal
-        Separei em mais tabelas para juntar cada coluna dependente de sua chave, colocando tabelas por categora, ex: Cliente, Vendedor e etc.
-    1.3 Terceira Forma Normal
-        Eliminação de atributos dependentes de outro na tabela, no caso separei o endereço do cliente ta tabela cliente.
+1. **Normalização**
 
-2. Desenhos
+   1.1 **Primeira Forma Normal**
+
+       Na primeira forma normal, separei a tabela inicial em tabelas menores para separar as colunas que possuíam mais de um dado e aproveitei os formatos de data que já estavam separados em data e hora.
+
+   1.2 **Segunda Forma Normal**
+
+       Separei em mais tabelas para juntar cada coluna dependente de sua chave, criando tabelas por categoria, por exemplo: Cliente, Vendedor, etc.
+
+   1.3 **Terceira Forma Normal**
+
+       Eliminei atributos dependentes de outros na tabela. No caso, separei o endereço do cliente da tabela cliente.
+
+
+2. **Desenhos**
 
     * Modelagem Relacional
     ![Relacional](../evidencias/relacional.png)
@@ -17,7 +24,7 @@
     * Modelagem Dimensional
     ![Dimensional](../evidencias/dimensional.sqlite.png)
 
-3. Entregáveis
+3. **Entregáveis**
 
 * Arquivos SQL gerados:
 [Relacional](../evidencias/concessionariarelacional.sqlite)
