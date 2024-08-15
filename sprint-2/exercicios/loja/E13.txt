@@ -1,0 +1,6 @@
+select cdpro, nmcanalvendas, nmpro, sum(qtd) as quantidade_vendas
+FROM (select * from tbvendas t where status = 'Concluído')
+where nmcanalvendas = 'Matriz' or nmcanalvendas = 'Ecommerce'
+group by cdpro, nmcanalvendas, nmpro
+order by quantidade_vendas
+limit 10

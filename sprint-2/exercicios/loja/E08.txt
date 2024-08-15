@@ -1,0 +1,6 @@
+SELECT nmvdd, t.cdvdd FROM tbvendas t 
+JOIN tbvendedor t2 ON t.cdvdd = t2.cdvdd
+GROUP BY t.cdvdd, nmvdd
+having t.status = 'Concluído'
+ORDER BY count(*) DESC 
+LIMIT 1

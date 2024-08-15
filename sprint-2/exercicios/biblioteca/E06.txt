@@ -1,0 +1,5 @@
+select a.nome, a.codautor, count(*) as quantidade_publicacoes from autor a
+join livro l on a.codautor = l.autor 
+group by a.codautor, a.nome, a.nascimento 
+order by quantidade_publicacoes DESC 
+limit 1

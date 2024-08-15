@@ -1,0 +1,3 @@
+SELECT titulo, valor FROM livro l 
+order by valor DESC 
+LIMIT 10

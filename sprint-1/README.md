@@ -1,6 +1,5 @@
 # Exercícios
 
-
 1. script 1
 [Resposta Ex1.](exercicios/ex1.md)
 

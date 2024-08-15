@@ -1,0 +1,2 @@
+select cdven from tbvendas t 
+where deletado = 1

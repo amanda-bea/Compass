@@ -1,0 +1,3 @@
+select a.nome from autor a
+full join livro l on a.codautor = l.autor
+where l.autor is null

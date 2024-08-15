@@ -1,0 +1,114 @@
+CREATE TABLE tbCliente (
+ idCliente INT,
+ nomeCliente VARCHAR,
+ cidadeCliente VARCHAR,
+ estadoCliente VARCHAR,
+ paisCliente VARCHAR,
+ idVendedor INT
+);
+
+insert into tbCliente (idCliente,
+ nomeCliente,
+ cidadeCliente,
+ estadoCliente,
+ paisCliente,
+ idVendedor)
+ select idCliente,
+ nomeCliente,
+ cidadeCliente,
+ estadoCliente,
+ paisCliente,
+ idVendedor
+ from tb_locacao
+--------------------------------------
+
+CREATE TABLE tbCarro (
+ idCarro INT,
+ kmCarro INT,
+ classiCarro VARCHAR,
+ marcaCarro VARCHAR,
+ modeloCarro VARCHAR,
+ anoCarro INT,
+ idCombustivel INT
+);
+
+insert into tbCarro (idCarro, kmCarro, classiCarro, marcaCarro, modeloCarro, anoCarro, idCombustivel)
+select idCarro, kmCarro, classiCarro, marcaCarro, modeloCarro, anoCarro, idcombustivel
+from tb_locacao 
+
+---------------------------------------
+
+CREATE TABLE tbEntrega (
+ idLocacao INT,
+ dataEntrega DATE,
+ horaEntrega TIME
+);
+
+insert into tbEntrega (idLocacao, dataEntrega, horaEntrega)
+select idLocacao, dataEntrega, horaEntrega
+from tb_locacao 
+
+----------------------------------------
+
+CREATE TABLE tbVendedor (
+ idVendedor INT,
+ nomeVendedor VARCHAR,
+ sexoVendedor SMALLINT,
+ estadoVendedor VARCHAR
+);
+
+insert into tbVendedor (idVendedor, nomeVendedor, sexoVendedor, estadoVendedor)
+select idVendedor, nomeVendedor, sexoVendedor, estadoVendedor
+from tb_locacao 
+
+-------------------------------------------
+
+CREATE TABLE tbLocacao (
+ idLocacao INT,
+ dataLocacao DATE,
+ horaLocacao TIME
+);
+
+insert into tbLocacao (idLocacao,dataLocacao,horaLocacao)
+select idLocacao, dataLocacao, horaLocacao
+from tb_locacao 
+----------------------------------------------
+
+CREATE TABLE tbAluguel (
+ idLocacao INT,
+ idCliente INT,
+ idCarro INT,
+ qtdDiaria INT,
+ vlrDiaria DECIMAL,
+ idVendedor INT
+);
+
+insert into tbAluguel (idLocacao, idCliente, idCarro, qtdDiaria, vlrDiaria, idVendedor)
+select idLocacao, idCliente, idCarro, qtdDiaria, vlrDiaria, idVendedor
+from tb 
+
+--------------------------------------------
+
+CREATE TABLE tbCombustivel (
+idCombustivel INT,
+tipoCombustivel VARCHAR
+);
+
+insert into tbCombustivel (idCombustivel, tipoCombustivel)
+select distinct idcombustivel, tipoCombustivel
+from tb_locacao
+
+---------------------------------------------------
+
+ALTER TABLE tbEntrega 
+ADD COLUMN idLocacao
+
+-------------------------------------------
+
+CREATE TABLE tbEndereco (
+ idCliente INT,
+ cidadeCliente VARCHAR,
+ estadoCliente VARCHAR,
+ paisCliente VARCHAR
+);
+

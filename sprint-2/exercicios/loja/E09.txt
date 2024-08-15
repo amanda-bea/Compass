@@ -1,0 +1,5 @@
+SELECT cdpro, nmpro FROM (select * from tbvendas t where status = 'Concluído')
+WHERE dtven BETWEEN '2014-02-03 00:00:00' AND '2018-02-02 23:59:00'
+GROUP BY cdpro, nmpro
+ORDER BY sum(qtd) DESC
+LIMIT 1
