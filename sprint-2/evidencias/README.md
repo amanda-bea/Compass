@@ -38,13 +38,17 @@ Exemplo criação e inserção dos dados em tabelas:
 Após fazer o mesmo com todas as tabelas esse foi o resultado
 
 ![relacional](../evidencias/relacional1.png)
+
 ![relacional](../evidencias/relacional2.png)
+
 ![relacional](../evidencias/relacional3.png)
 
 O mesmo processo foi empregado para a criação da tabela dimensional, mas dessa vez com a criação de uam tabela fato que liga a todas as tabelas dimensão, gerando as tabelas:
 
 ![dimensional](../evidencias/dimensional1.png)
+
 ![dimensional](../evidencias/dimensional2.png)
+
 ![dimensional](../evidencias/dimensional3.png)
 
 O modelo relacional e dimensional geraram os seguintes diagramas, respectivamente:
