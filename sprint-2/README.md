@@ -13,8 +13,10 @@
 [Arquivo 2](exercicios/exportação/10_MaisCaros.csv)
 
 1. Query
+
  A consulta foi feita no DBeaver com comandos básicos de sql e renomeação de colunas.
 2. Exportação
+
  A exportação foi feita pela interface gráfica do próorio DBeaver onde é possível escolher o formato do arquivo e caracter de separação.
 
 # README
