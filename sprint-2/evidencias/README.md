@@ -13,7 +13,7 @@ Ao executar os exercícios primeiramente no DBeaver, o SGDB retornava o código 
 
 ![Exercício 4](../exercicios/loja/E09.png)
 
-Utilizaçõ de "SubQuery"
+Utilização de "SubQuery"
 ![Exercício 4](../exercicios/loja/E10.png)
 [Exercício 4](../exercicios/biblioteca/E04.txt)
 
