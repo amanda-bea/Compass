@@ -1,0 +1,161 @@
+OBS: Resultado no próprio arquivo TXT por falta de lincença no Excel.
+
+(Query 1) Receita, leads, conversão e ticket médio mês a mês
+Colunas: mês, leads (#), vendas (#), receita (k, R$), conversão (%), ticket médio (k, R$)
+with 
+	leads as (
+		select
+			date_trunc('month', visit_page_date)::date as visit_page_month,
+			count(*) as visit_page_count
+		from sales.funnel
+		group by visit_page_month
+		order by visit_page_month
+	),
+	
+	pag as (
+		select
+			date_trunc('month', fun.paid_date)::date as paid_month,
+			count(fun.paid_date) as paid_count,
+			sum(pro.price * (1+fun.discount)) as receita
+		from sales.funnel as fun
+		left join sales.products as pro
+			on fun.product_id = pro.product_id
+		where fun.paid_date is not null
+		group by paid_month
+		order by paid_month
+	)
+	
+select
+	leads.visit_page_month as "mês",
+	leads.visit_page_count as "leads (#)",
+	pag.paid_count as "vendas (#)",
+	(pag.receita/1000) as "receita (k, R$)",
+	(pag.paid_count::float/leads.visit_page_count::float) as "conversão (%)",
+	(pag.receita/pag.paid_count/1000) as "ticket médio (k, R$)"
+from leads
+left join pag
+	on leads.visit_page_month = paid_month
+
+
+RESULTADO: 
+"2020-09-01"	26	5	259.2900000000000000	0.19230769230769232	51.8580000000000000
+"2020-10-01"	931	35	1676.4568500000000000	0.03759398496240601	47.8987671428571430
+"2020-11-01"	1207	44	2278.5075000000000000	0.03645401822700911	51.7842613636363640
+"2020-12-01"	1008	33	2602.7686900000000000	0.03273809523809524	78.8717784848484850
+"2021-01-01"	1058	32	2297.2240500000000000	0.030245746691871456	71.7882515625000000
+"2021-02-01"	1300	68	3631.0959000000000000	0.052307692307692305	53.3984691176470590
+"2021-03-01"	1932	119	7911.1924800000000000	0.06159420289855073	66.4806090756302520
+"2021-04-01"	2376	142	7477.5559200000000000	0.05976430976430976	52.6588445070422540
+"2021-05-01"	3819	394	21508.476480000000	0.10316836868290129	54.5900418274111680
+"2021-06-01"	4440	589	33179.246640000000	0.13265765765765766	56.3314883531409170
+"2021-07-01"	6130	1073	58987.786490000000	0.17504078303425774	54.9746379217148180
+"2021-08-01"	6353	1254	68274.090230000000	0.19738706123091454	54.4450480303030300
+ ------------------------------------------------------------------------------------------------------
+(Query 2) Estados que mais venderam
+Colunas: país, estado, vendas (#)
+
+select
+	'Brazil' as país,
+	cus.state as estado,
+	count(fun.paid_date) as "vendas (#)"
+
+from sales.funnel as fun
+left join sales.customers as cus on fun.customer_id = cus.customer_id
+where paid_date between '2021-08-01' and '2021-08-31'
+group by país, estado
+order by "vendas (#)" desc
+limit 5
+
+RESULTADO:
+"país"	"estado"	"vendas (#)"
+"Brazil"	"SP"	734
+"Brazil"	"MG"	142
+"Brazil"	"SC"	110
+"Brazil"	"RS"	98
+"Brazil"	"RJ"	66
+-------------------------------------------------------------------------------------------------------
+(Query 3) Marcas que mais venderam no mês
+Colunas: marca, vendas (#)
+
+select
+pro.brand as marca,
+count(fun.paid_date) as "vendas (#)"
+
+from sales.funnel as fun
+left join sales.products as pro
+	on fun.product_id = pro.product_id
+where paid_date between '2021-08-01' and '2021-08-31'
+group by marca
+order by "vendas (#)" desc
+limit 5
+
+RESULTADO:
+"marca"	"vendas (#)"
+"FIAT"	248
+"CHEVROLET"	237
+"VOLKSWAGEN"	193
+"FORD"	136
+"RENAULT"	108 
+-------------------------------------------------------------------------------------------------------
+(Query 4) Lojas que mais venderam
+Colunas: loja, vendas (#)
+
+select
+sto.store_name as loja,
+count(fun.paid_date) as "vendas (#)"
+
+from sales.funnel as fun
+left join sales.stores as sto on fun.store_id = sto.store_id
+where paid_date between '2021-08-01' and '2021-08-31'
+group by loja
+order by "vendas (#)" desc
+limit 5
+
+RESULTADO:
+"loja"	"vendas (#)"
+"KIYOKO CILEIDI JERY LTDA"	18
+"CLAUDINEO JOZENAIDE LUYANE LTDA"	15
+"ADO JUBERTH VALTUIDES LTDA"	10
+"GERRIVALDO ROSIELEN VALTEIDE LTDA"	10
+"NILFA CID SILVANDRO LTDA"	10
+-------------------------------------------------------------------------------------------------------
+(Query 5) Dias da semana com maior número de visitas ao site
+Colunas: dia_semana, dia da semana, visitas (#)
+
+select
+	extract('dow' from visit_page_date) as dia_semana,
+	case 
+		when extract('dow' from visit_page_date)=0 then 'domingo'
+		when extract('dow' from visit_page_date)=1 then 'segunda'
+		when extract('dow' from visit_page_date)=2 then 'terça'
+		when extract('dow' from visit_page_date)=3 then 'quarta'
+		when extract('dow' from visit_page_date)=4 then 'quinta'
+		when extract('dow' from visit_page_date)=5 then 'sexta'
+		when extract('dow' from visit_page_date)=6 then 'sábado'
+		else null end as "dia da semana",
+	count(*) as "visitas (#)"
+
+from sales.funnel
+where visit_page_date between '2021-08-01' and '2021-08-31'
+group by dia_semana
+order by dia_semana
+
+RESULTADO:
+"dia_semana"	"dia da semana"	"visitas (#)"
+0	"domingo"	67
+1	"segunda"	1301
+2	"terça"	1238
+3	"quarta"	1038
+4	"quinta"	1076
+5	"sexta"	956
+6	"sábado"	677
+
+
+
+
+
+
+
+
+
+ 

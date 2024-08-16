@@ -29,3 +29,8 @@ README do Desafio em:
 
 README com todas as evidências em:
 [Evidências](evidencias/README.md)
+
+# Certificados
+
+![AWS](evidencias/certificadoaws.jpg)
+

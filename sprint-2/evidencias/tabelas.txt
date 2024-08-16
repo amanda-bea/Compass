@@ -58,7 +58,7 @@ CREATE TABLE tbVendedor (
 );
 
 insert into tbVendedor (idVendedor, nomeVendedor, sexoVendedor, estadoVendedor)
-select idVendedor, nomeVendedor, sexoVendedor, estadoVendedor
+select distinct idVendedor, nomeVendedor, sexoVendedor, estadoVendedor
 from tb_locacao 
 
 -------------------------------------------

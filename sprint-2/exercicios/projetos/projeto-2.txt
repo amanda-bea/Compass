@@ -1,0 +1,533 @@
+OBS: Resultado no próprio arquivo TXT por falta de lincença no Excel.
+
+(Query 1) Gênero dos leads
+Colunas: gênero, leads(#)
+
+select
+	case
+		when ibge.gender = 'male' then 'homens'
+		when ibge.gender = 'female' then 'mulheres'
+		end as "gênero",
+	count(*) as "leads (#)"
+
+from sales.customers as cus
+left join temp_tables.ibge_genders as ibge
+	on lower(cus.first_name) = lower(ibge.first_name)
+group by ibge.gender
+
+RESULTADO:
+"gênero"	"leads (#)"
+"mulheres"	15106
+"homens"	10003
+-------------------------------------------------------------------------------------------------------
+(Query 2) Status profissional dos leads
+Colunas: status profissional, leads (%)
+
+select
+	case
+		when professional_status = 'freelancer' then 'freelancer'
+		when professional_status = 'retired' then 'aposentado(a)'
+		when professional_status = 'clt' then 'clt'
+		when professional_status = 'self_employed' then 'autônomo(a)'		
+		when professional_status = 'other' then 'outro'
+		when professional_status = 'businessman' then 'empresário(a)'
+		when professional_status = 'civil_servant' then 'funcionário(a) público(a)'
+		when professional_status = 'student' then 'estudante'
+		end as "status profissional",
+	(count(*)::float)/(select count(*) from sales.customers) as "leads (%)"
+
+from sales.customers
+group by professional_status
+order by "leads (%)"
+
+RESULTADO:
+"status profissional"	"leads (%)"
+"estudante"	3.9826357083117606e-05
+"funcionário(a) público(a)"	0.017085507188657454
+"aposentado(a)"	0.04261420207893584
+"freelancer"	0.052889402206380186
+"autônomo(a)"	0.07204587996335975
+"empresário(a)"	0.07543112031542475
+"outro"	0.09044565693576008
+"clt"	0.6494484049543988
+-------------------------------------------------------------------------------------------------------
+(Query 3) Faixa etária dos leads
+Colunas: faixa etária, leads (%)
+
+select
+	case
+		when datediff('years', birth_date, current_date) < 20 then '0-20'
+		when datediff('years', birth_date, current_date) < 40 then '20-40'
+		when datediff('years', birth_date, current_date) < 60 then '40-60'
+		when datediff('years', birth_date, current_date) < 80 then '60-80'
+		else '80+' end "faixa etária",
+		count(*)::float/(select count(*) from sales.customers) as "leads (%)"
+
+from sales.customers
+group by "faixa etária"
+order by "faixa etária" desc
+
+RESULTADO:
+"faixa etária"	"leads (%)"
+"80+"	0.022541718109044567
+"60-80"	0.19753873113226333
+"40-60"	0.3208013063045123
+"20-40"	0.45911824445417976
+-------------------------------------------------------------------------------------------------------
+(Query 4) Faixa salarial dos leads
+Colunas: faixa salarial, leads (%), ordem
+
+select
+	case
+		when income < 5000 then '0-5000'
+		when income < 10000 then '5000-10000'
+		when income < 15000 then '10000-15000'
+		when income < 20000 then '15000-20000'
+		else '20000+' end "faixa salarial",
+		count(*)::float/(select count(*) from sales.customers) as "leads (%)",
+	case
+		when income < 5000 then 1
+		when income < 10000 then 2
+		when income < 15000 then 3
+		when income < 20000 then 4
+		else 5 end "ordem"
+
+from sales.customers
+group by "faixa salarial", "ordem"
+order by "ordem" desc
+
+RESULTADO:
+"faixa salarial"	"leads (%)"	"ordem"
+"20000+"	0.01601019554741328	5
+"15000-20000"	0.017722728901987336	4
+"10000-15000"	0.09538412521406667	3
+"5000-10000"	0.7102632522203194	2
+"0-5000"	0.16061969811621332	1
+-------------------------------------------------------------------------------------------------------
+(Query 5) Classificação dos veículos visitados
+Colunas: classificação do veículo, veículos visitados (#)
+Regra de negócio: Veículos novos tem até 2 anos e seminovos acima de 2 anos
+
+with
+	classificacao_veiculos as (
+	
+		select
+			fun.visit_page_date,
+			pro.model_year,
+			extract('year' from visit_page_date) - pro.model_year::int as idade_veiculo,
+			case
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=2 then 'novo'
+				else 'seminovo'
+				end as "classificação do veículo"
+		
+		from sales.funnel as fun
+		left join sales.products as pro
+			on fun.product_id = pro.product_id	
+	)
+
+select
+	"classificação do veículo",
+	count(*) as "veículos visitados (#)"
+from classificacao_veiculos
+group by "classificação do veículo"
+
+RESULTADO:
+"classificação do veículo"	"veículos visitados (#)"
+"novo"	1162
+"seminovo"	29418
+-------------------------------------------------------------------------------------------------------
+(Query 6) Idade dos veículos visitados
+Colunas: Idade do veículo, veículos visitados (%), ordem
+
+with
+	faixa_de_idade_dos_veiculos as (
+	
+		select
+			fun.visit_page_date,
+			pro.model_year,
+			extract('year' from visit_page_date) - pro.model_year::int as idade_veiculo,
+			case
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=2 then 'até 2 anos'
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=4 then 'de 2 à 4 anos'
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=6 then 'de 4 à 6 anos'
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=8 then 'de 6 à 8 anos'
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=10 then 'de 8 à 10 anos'
+				else 'acima de 10 anos'
+				end as "idade do veículo",
+			case
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=2 then 1
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=4 then 2
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=6 then 3
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=8 then 4
+				when (extract('year' from visit_page_date) - pro.model_year::int)<=10 then 5
+				else 6
+				end as "ordem"
+
+		from sales.funnel as fun
+		left join sales.products as pro
+			on fun.product_id = pro.product_id	
+	)
+
+select
+	"idade do veículo",
+	count(*)::float/(select count(*) from sales.funnel) as "veículos visitados (%)",
+	ordem
+from faixa_de_idade_dos_veiculos
+group by "idade do veículo", ordem
+order by ordem
+
+RESULTADO:
+"idade do veículo"	"veículos visitados (%)"	"ordem"
+"até 2 anos"	0.037998691955526485	1
+"de 2 à 4 anos"	0.10775016350555919	2
+"de 4 à 6 anos"	0.18103335513407456	3
+"de 6 à 8 anos"	0.19630477436232832	4
+"de 8 à 10 anos"	0.24767822105951603	5
+"acima de 10 anos"	0.22923479398299543	6
+-------------------------------------------------------------------------------------------------------
+(Query 7) Veículos mais visitados por marca
+Colunas: brand, model, visitas (#)
+
+select
+	pro.brand,
+	pro.model,
+	count(*) as "visitas (#)"
+
+from sales.funnel as fun
+left join sales.products as pro
+	on fun.product_id = pro.product_id
+group by pro.brand, pro.model
+order by pro.brand, pro.model, "visitas (#)"
+
+RESULTADO:
+"brand"	"model"	"visitas (#)"
+"AUDI"	"A1"	18
+"AUDI"	"A3"	32
+"AUDI"	"A4"	19
+"AUDI"	"A5"	7
+"AUDI"	"A6"	1
+"AUDI"	"A7"	1
+"AUDI"	"Q3"	30
+"AUDI"	"Q5"	6
+"AUDI"	"Q7"	4
+"AUDI"	"R8"	1
+"AUDI"	"RS4"	1
+"AUDI"	"TT"	4
+"AUDI"	"TTS"	1
+"BMW"	"0"	32
+"BMW"	"116IA"	1
+"BMW"	"118IA"	13
+"BMW"	"118IA/"	6
+"BMW"	"120IA"	8
+"BMW"	"125I"	2
+"BMW"	"130I"	1
+"BMW"	"130IA"	1
+"BMW"	"225I"	1
+"BMW"	"316I"	2
+"BMW"	"318IA"	7
+"BMW"	"320IA"	32
+"BMW"	"328IA"	9
+"BMW"	"420I"	1
+"BMW"	"I8"	1
+"BMW"	"M2"	2
+"BMW"	"M4"	2
+"BMW"	"M5"	1
+"BMW"	"M6"	2
+"BMW"	"X1"	57
+"BMW"	"X2"	6
+"BMW"	"X3"	5
+"BMW"	"X4"	2
+"BMW"	"X5"	5
+"BMW"	"X6"	19
+"BMW"	"Z4"	4
+"CHERY"	"ARRIZO"	1
+"CHERY"	"CELER"	12
+"CHERY"	"CIELO"	4
+"CHERY"	"FACE"	11
+"CHERY"	"QQ"	21
+"CHERY"	"TIGGO"	22
+"CHEVROLET"	"0"	1
+"CHEVROLET"	"AGILE"	249
+"CHEVROLET"	"ASTRA"	145
+"CHEVROLET"	"CAMARO"	8
+"CHEVROLET"	"CAPTIVA"	137
+"CHEVROLET"	"CELTA"	1028
+"CHEVROLET"	"CHEVROLET/CLASSIC"	1
+"CHEVROLET"	"CHEVROLET/ONIX"	1
+"CHEVROLET"	"CLASSIC"	500
+"CHEVROLET"	"COBALT"	238
+"CHEVROLET"	"CORSA"	561
+"CHEVROLET"	"CRUZE"	219
+"CHEVROLET"	"GM/ASTRA"	2
+"CHEVROLET"	"GM/CORSA"	1
+"CHEVROLET"	"I/CHEVROLET"	1
+"CHEVROLET"	"I/GM"	1
+"CHEVROLET"	"JOY"	37
+"CHEVROLET"	"MALIBU"	4
+"CHEVROLET"	"MERIVA"	155
+"CHEVROLET"	"MONTANA"	180
+"CHEVROLET"	"OMEGA"	1
+"CHEVROLET"	"ONIX"	1012
+"CHEVROLET"	"PRISMA"	680
+"CHEVROLET"	"S10"	172
+"CHEVROLET"	"SONIC"	39
+"CHEVROLET"	"SPIN"	291
+"CHEVROLET"	"TRACKER"	44
+"CHEVROLET"	"TRAILBLAZER"	7
+"CHEVROLET"	"VECTRA"	155
+"CHEVROLET"	"ZAFIRA"	67
+"CHRYSLER"	"300"	6
+"CHRYSLER"	"PT"	7
+"CHRYSLER"	"TOWN"	6
+"CITROEN"	"AIRCROSS"	80
+"CITROEN"	"C3"	438
+"CITROEN"	"C4"	250
+"CITROEN"	"C5"	4
+"CITROEN"	"CITROE"	1
+"CITROEN"	"DS3"	1
+"CITROEN"	"DS4"	6
+"CITROEN"	"DS5"	3
+"CITROEN"	"I/CITROEN"	1
+"CITROEN"	"JUMPER"	3
+"CITROEN"	"XSARA"	38
+"DODGE"	"JOURNEY"	29
+"DODGE"	"RAM"	5
+"EFFA"	"K01"	1
+"FIAT"	"500"	24
+"FIAT"	"ARGO"	145
+"FIAT"	"BRAVO"	55
+"FIAT"	"CRONOS"	15
+"FIAT"	"DOBLO"	120
+"FIAT"	"DUCATO"	38
+"FIAT"	"FIAT/PALIO"	3
+"FIAT"	"FIAT/UNO"	1
+"FIAT"	"FIORINO"	264
+"FIAT"	"FREEMONT"	59
+"FIAT"	"GRAND"	220
+"FIAT"	"I/FIAT"	1
+"FIAT"	"IDEA"	317
+"FIAT"	"LINEA"	86
+"FIAT"	"MOBI"	112
+"FIAT"	"PALIO"	1699
+"FIAT"	"PUNTO"	423
+"FIAT"	"SIENA"	493
+"FIAT"	"STILO"	72
+"FIAT"	"STRADA"	295
+"FIAT"	"TORO"	131
+"FIAT"	"UNO"	1385
+"FORD"	"COURIER"	6
+"FORD"	"ECOSPORT"	423
+"FORD"	"EDGE"	30
+"FORD"	"F-250"	3
+"FORD"	"FIESTA"	1221
+"FORD"	"FOCUS"	223
+"FORD"	"FORD/FIESTA"	1
+"FORD"	"FUSION"	133
+"FORD"	"I/FORD"	1
+"FORD"	"KA"	968
+"FORD"	"KA+"	178
+"FORD"	"MUSTANG"	3
+"FORD"	"RANGER"	95
+"FORD"	"TRANSIT"	11
+"FOTON"	"AUMARK"	1
+"GEELY"	"EC7"	1
+"HAFEI"	"TOWNER"	6
+"HONDA"	"0"	1
+"HONDA"	"ACCORD"	1
+"HONDA"	"CITY"	133
+"HONDA"	"CIVIC"	602
+"HONDA"	"CR-V"	69
+"HONDA"	"FIT"	240
+"HONDA"	"HONDA/CIVIC"	1
+"HONDA"	"HR-V"	81
+"HONDA"	"WR-V"	1
+"HYUNDAI"	"AZERA"	60
+"HYUNDAI"	"CRETA"	45
+"HYUNDAI"	"ELANTRA"	38
+"HYUNDAI"	"GENESIS"	1
+"HYUNDAI"	"GRAND"	4
+"HYUNDAI"	"HB20"	768
+"HYUNDAI"	"HB20S"	200
+"HYUNDAI"	"HB20X"	22
+"HYUNDAI"	"HR"	45
+"HYUNDAI"	"I/HYUNDAI"	1
+"HYUNDAI"	"I30"	435
+"HYUNDAI"	"I30CW"	19
+"HYUNDAI"	"IX35"	161
+"HYUNDAI"	"SANTA"	83
+"HYUNDAI"	"SONATA"	45
+"HYUNDAI"	"TUCSON"	327
+"HYUNDAI"	"VELOSTER"	38
+"HYUNDAI"	"VERACRUZ"	41
+"JAC"	"IEV"	2
+"JAC"	"J2"	12
+"JAC"	"J3"	65
+"JAC"	"J5"	6
+"JAC"	"J6"	11
+"JAC"	"T40"	4
+"JAC"	"T5"	5
+"JAC"	"T6"	7
+"JAC"	"T60"	1
+"JAC"	"T8"	1
+"JAC"	"T80"	1
+"JAGUAR"	"E-PACE"	1
+"JAGUAR"	"F-PACE"	5
+"JAGUAR"	"XE"	1
+"JAGUAR"	"XF"	2
+"JEEP"	"CHEROKEE"	3
+"JEEP"	"COMPASS"	90
+"JEEP"	"GRAND"	4
+"JEEP"	"RENEGADE"	142
+"JEEP"	"RENEGADE1.8"	5
+"JINBEI"	"TOPIC"	6
+"KIA MOTORS"	"BONGO"	21
+"KIA MOTORS"	"CADENZA"	2
+"KIA MOTORS"	"CARENS"	2
+"KIA MOTORS"	"CARNIVAL"	1
+"KIA MOTORS"	"CERATO"	42
+"KIA MOTORS"	"OPTIMA"	8
+"KIA MOTORS"	"PICANTO"	24
+"KIA MOTORS"	"SORENTO"	40
+"KIA MOTORS"	"SOUL"	48
+"KIA MOTORS"	"SPORTAGE"	141
+"LAMBORGHINI"	"GALLARDO"	1
+"LAND ROVER"	"DEFENDER"	1
+"LAND ROVER"	"DISCOVERY"	8
+"LAND ROVER"	"DISCOVERY3"	1
+"LAND ROVER"	"DISCOVERY4"	9
+"LAND ROVER"	"FREELANDER2"	22
+"LAND ROVER"	"RANGE"	110
+"LEXUS"	"CT200H"	2
+"LEXUS"	"ES-350"	1
+"LEXUS"	"NX-300"	1
+"LIFAN"	"320"	1
+"LIFAN"	"530"	5
+"LIFAN"	"X60"	13
+"MERCEDES-BENZ"	"A"	5
+"MERCEDES-BENZ"	"C-180"	23
+"MERCEDES-BENZ"	"C-200"	15
+"MERCEDES-BENZ"	"C-250"	6
+"MERCEDES-BENZ"	"C-300"	1
+"MERCEDES-BENZ"	"CLA-180"	1
+"MERCEDES-BENZ"	"CLA-200"	7
+"MERCEDES-BENZ"	"CLA-250"	4
+"MERCEDES-BENZ"	"CLASSE"	20
+"MERCEDES-BENZ"	"E-250"	2
+"MERCEDES-BENZ"	"E-63"	1
+"MERCEDES-BENZ"	"GL-500"	1
+"MERCEDES-BENZ"	"GLA"	26
+"MERCEDES-BENZ"	"GLC"	3
+"MERCEDES-BENZ"	"GLE-400"	2
+"MERCEDES-BENZ"	"ML-350"	1
+"MERCEDES-BENZ"	"ML-63"	1
+"MERCEDES-BENZ"	"SLK-200"	2
+"MERCEDES-BENZ"	"SLK-250"	1
+"MERCEDES-BENZ"	"SPRINTER"	17
+"MINI"	"COOPER"	13
+"MITSUBISHI"	"ASX"	37
+"MITSUBISHI"	"ECLIPSE"	2
+"MITSUBISHI"	"GRANDIS"	2
+"MITSUBISHI"	"L200"	53
+"MITSUBISHI"	"LANCER"	24
+"MITSUBISHI"	"OUTLANDER"	26
+"MITSUBISHI"	"PAJERO"	32
+"NISSAN"	"FRONTIER"	42
+"NISSAN"	"KICKS"	44
+"NISSAN"	"LIVINA"	77
+"NISSAN"	"MARCH"	101
+"NISSAN"	"NISSAN/LIVINA"	1
+"NISSAN"	"SENTRA"	98
+"NISSAN"	"TIIDA"	69
+"NISSAN"	"VERSA"	210
+"NISSAN"	"X-TRAIL"	2
+"PEUGEOT"	"2008"	17
+"PEUGEOT"	"206"	91
+"PEUGEOT"	"207"	467
+"PEUGEOT"	"208"	65
+"PEUGEOT"	"3008"	12
+"PEUGEOT"	"307"	128
+"PEUGEOT"	"308"	44
+"PEUGEOT"	"407"	2
+"PEUGEOT"	"408"	34
+"PEUGEOT"	"5008"	1
+"PEUGEOT"	"508"	1
+"PEUGEOT"	"BOXER"	2
+"PEUGEOT"	"HOGGAR"	6
+"PEUGEOT"	"PARTNER"	10
+"PEUGEOT"	"RCZ"	1
+"PORSCHE"	"BOXSTER"	5
+"PORSCHE"	"CAYENNE"	12
+"PORSCHE"	"CAYMAN"	1
+"PORSCHE"	"MACAN"	3
+"RAM"	"2500"	4
+"RENAULT"	"CAPTUR"	17
+"RENAULT"	"CLIO"	192
+"RENAULT"	"DUSTER"	152
+"RENAULT"	"FLUENCE"	52
+"RENAULT"	"KANGOO"	28
+"RENAULT"	"KWID"	111
+"RENAULT"	"LOGAN"	639
+"RENAULT"	"MASTER"	33
+"RENAULT"	"MEGANE"	92
+"RENAULT"	"RENAULT/SANDERO"	1
+"RENAULT"	"SANDERO"	1039
+"RENAULT"	"SCÉNIC"	11
+"RENAULT"	"STEPWAY"	2
+"RENAULT"	"SYMBOL"	39
+"SMART"	"FORTWO"	2
+"SSANGYONG"	"ACTYON"	3
+"SSANGYONG"	"KYRON"	4
+"SUBARU"	"IMPREZA"	5
+"SUZUKI"	"GRAND"	8
+"SUZUKI"	"SX4"	4
+"TOYOTA"	"CAMRY"	3
+"TOYOTA"	"COROLLA"	303
+"TOYOTA"	"ETIOS"	146
+"TOYOTA"	"HILUX"	113
+"TOYOTA"	"PRIUS"	2
+"TOYOTA"	"RAV4"	8
+"TOYOTA"	"YARIS"	5
+"TROLLER"	"T-4"	4
+"VOLKSWAGEN"	"0"	1
+"VOLKSWAGEN"	"AMAROK"	84
+"VOLKSWAGEN"	"BORA"	14
+"VOLKSWAGEN"	"CROSSFOX"	76
+"VOLKSWAGEN"	"FOX"	983
+"VOLKSWAGEN"	"FUSCA"	7
+"VOLKSWAGEN"	"GOL"	1547
+"VOLKSWAGEN"	"GOLF"	186
+"VOLKSWAGEN"	"JETTA"	189
+"VOLKSWAGEN"	"KOMBI"	42
+"VOLKSWAGEN"	"NEW"	18
+"VOLKSWAGEN"	"NIVUS"	16
+"VOLKSWAGEN"	"PARATI"	35
+"VOLKSWAGEN"	"PASSAT"	15
+"VOLKSWAGEN"	"POLO"	227
+"VOLKSWAGEN"	"SAVEIRO"	280
+"VOLKSWAGEN"	"SPACECROSS"	7
+"VOLKSWAGEN"	"SPACEFOX"	153
+"VOLKSWAGEN"	"T-CROSS"	18
+"VOLKSWAGEN"	"TIGUAN"	62
+"VOLKSWAGEN"	"TOUAREG"	2
+"VOLKSWAGEN"	"UP!"	150
+"VOLKSWAGEN"	"VIRTUS"	50
+"VOLKSWAGEN"	"VOYAGE"	637
+"VOLKSWAGEN"	"VW/FOX"	1
+"VOLKSWAGEN"	"VW/NOVO"	1
+"VOLVO"	"C30"	1
+"VOLVO"	"S60"	7
+"VOLVO"	"V40"	5
+"VOLVO"	"V60"	2
+"VOLVO"	"XC"	32
+
+
+
+
+
+
+
+
+
+
+
+
