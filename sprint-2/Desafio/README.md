@@ -16,6 +16,8 @@
 
        Eliminei atributos dependentes de outros na tabela. No caso, separei o endereço do cliente da tabela cliente.
 
+2. **Dimensinal**
+    Mantive muitas colunas e tabelas, apenas mudando o relacionamento e criando a tabela fato(apenas com dados numéricos) que liga todas as dimensões.
 
 3. **Desenhos**
 
