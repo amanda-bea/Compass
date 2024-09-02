@@ -10,8 +10,14 @@ Destrinchando tudo sobre Git, GitHub e como montar repositórios da melhor forma
 Aprendizado focado em conhecimentos e práticas de SQL usando o Postgre, além de prática usando SQLite e modelagem de dados.
 Primeiro curso da AWS finalizado, com foco em vendas dos produtos AWS mas com conhecimentos básicos e funcionamento do sistema nuvem.
 
+### Sprint 3
+Curso focado em Python do básico ao avançado, além de mais um curso com mais detalhes sobre AWS.
+Para o desafio foram necessários conhecimentos sobre Python, tratamento de dados com o Pandas e criação de gráficos com o Matplotlib.
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
 
 [Sprint-2](sprint-2/README.md)
+
+[Sprint-3](sprint-3/README.md)
