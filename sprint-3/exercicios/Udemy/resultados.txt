@@ -109,10 +109,17 @@ exercício 20:
 [89, 55, 34, 21, 13, 8, 5, 3, 2, 0, 1]
 --------------------------------------------------------------------------------------
 exercício 21:
-
+Pato
+Voando...
+Pato emitindo som...
+Quack Quack
+Pardal
+Voando...
+Pardal emitindo som...
+Piu Piu
 --------------------------------------------------------------------------------------
 exercício 22:
-
+Fulano De Tal
 --------------------------------------------------------------------------------------
 exercício 23:
 Somando: 4+5 = 9
@@ -123,5 +130,7 @@ exercício 24:
 [9, 8, 7, 6]
 --------------------------------------------------------------------------------------
 exercício 25:
-
+O avião de modelo 'BOIENG456' possui uma velocidade máxima de 1500 km/h, capacidade para 400 passageiros e é da cor Azul.
+O avião de modelo 'Embraer Praetor 600' possui uma velocidade máxima de 863 km/h, capacidade para 14 passageiros e é da cor Azul.
+O avião de modelo 'Antonov An-2' possui uma velocidade máxima de 258 km/h, capacidade para 12 passageiros e é da cor Azul.
 --------------------------------------------------------------------------------------

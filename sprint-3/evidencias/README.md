@@ -8,8 +8,8 @@ Ao executar os primeiros exercícios não tive muita dificuldade, tive mais prob
 
 
 Exercício de POO
-#![Exercício 4](../exercicios/loja/E10.png)
-#[Exercício 4](../exercicios/biblioteca/E04.txt)
+![Exercício 1](../evidencias/ex1poo.png)
+![Exercício 2](../evidencias/ex2poo.png)
 
 
 # ETL

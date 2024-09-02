@@ -31,5 +31,5 @@ README com todas as evidências em:
 
 # Certificados
 
-![AWS](Certificados/certificadoaws.jpg)
+![AWS](Certificados/16197_3_6055050_1725027400_AWS%20Course%20Completion%20Certificate_page-0001.jpg)
 
