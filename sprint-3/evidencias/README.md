@@ -37,6 +37,8 @@ Ao mostrar, o próprio Jupyter gera uma tabela com os dados selecionados.
 
 ![gráfico 1](../evidencias/saidamature.png)
 
+As saídas parecem ter linhas duplicadas, mas a linhas não são totalmente iguais, por isso optei em não retirá-las
+
 ![gráfico 1](../evidencias/reviews.png)
 
 Os gráficos escolhidos foram o de dispersão(App melhor avaliado) e de linha(Tops Apps por tamanho em MB), por se tratar de um dado de apenas um valor o gráfico de dispersão ficou parecido com o gráfico de linha.
