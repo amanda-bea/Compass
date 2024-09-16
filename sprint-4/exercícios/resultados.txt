@@ -1,0 +1,46 @@
+exercício 1:
+[8000, 7998, 7996, 7994, 7994]
+39982
+--------------------------------------------------------------------------------------
+exercício 5:
+Nome: Alexandre da Rosa Notas: [10, 10, 8] Média: 9.33
+Nome: Ana Clara das Neves Notas: [7, 6, 6] Média: 6.33
+Nome: Ana GonÃ§alves Notas: [8, 3, 3] Média: 4.67
+Nome: Ana Julia Cavalcanti Notas: [10, 10, 9] Média: 9.67
+Nome: Ana VitÃ³ria Moraes Notas: [10, 6, 5] Média: 7.0
+Nome: AndrÃ© Mendes Notas: [6, 4, 4] Média: 4.67
+Nome: Beatriz Moreira Notas: [6, 4, 3] Média: 4.33
+Nome: Carolina da Mata Notas: [5, 5, 3] Média: 4.33
+Nome: Catarina Barros Notas: [10, 4, 3] Média: 5.67
+Nome: CauÃª FogaÃ§a Notas: [10, 5, 5] Média: 6.67
+Nome: CecÃ­lia Costa Notas: [9, 4, 4] Média: 5.67
+Nome: Clara da Rocha Notas: [9, 9, 7] Média: 8.33
+Nome: Davi Lucas Gomes Notas: [9, 8, 8] Média: 8.33
+Nome: Diogo AragÃ£o Notas: [7, 5, 5] Média: 5.67
+Nome: Dr. Pedro Henrique Rezende Notas: [10, 10, 3] Média: 7.67
+Nome: Dra. HeloÃ­sa Pinto Notas: [8, 6, 5] Média: 6.33
+Nome: Dra. Laura Pereira Notas: [6, 5, 3] Média: 4.67
+Nome: Enzo Melo Notas: [10, 10, 6] Média: 8.67
+Nome: Gabriel Novaes Notas: [10, 10, 8] Média: 9.33
+Nome: Gabriel da Rosa Notas: [3, 3, 2] Média: 2.67
+Nome: Heitor AragÃ£o Notas: [6, 6, 5] Média: 5.67
+Nome: Heitor Martins Notas: [10, 9, 6] Média: 8.33
+Nome: JoÃ£o Cardoso Notas: [10, 7, 5] Média: 7.33
+Nome: JoÃ£o Pedro Moura Notas: [5, 3, 3] Média: 3.67
+Nome: Leandro Rodrigues Notas: [7, 5, 4] Média: 5.33
+Nome: LetÃ­cia Jesus Notas: [6, 5, 5] Média: 5.33
+Nome: Luigi Pereira Notas: [9, 8, 8] Média: 8.33
+Nome: Maria Luiza Correia Notas: [7, 5, 5] Média: 5.67
+Nome: Maria Mendes Notas: [7, 3, 3] Média: 4.33
+Nome: Nicolas Campos Notas: [10, 8, 7] Média: 8.33
+Nome: Nina Viana Notas: [10, 9, 6] Média: 8.33
+Nome: Paulo da Rosa Notas: [5, 5, 5] Média: 5.0
+Nome: Pedro Castro Notas: [9, 8, 5] Média: 7.33
+Nome: Pedro Lucas AraÃºjo Notas: [9, 7, 3] Média: 6.33
+Nome: Rodrigo Jesus Notas: [10, 8, 8] Média: 8.67
+Nome: Ryan Nascimento Notas: [9, 6, 4] Média: 6.33
+Nome: Sr. Luiz OtÃ¡vio Cardoso Notas: [10, 10, 9] Média: 9.67
+Nome: Sra. Melissa da Cunha Notas: [10, 5, 3] Média: 6.0
+Nome: Srta. Carolina Almeida Notas: [10, 9, 2] Média: 7.0
+Nome: Thiago Silveira Notas: [7, 7, 4] Média: 6.0
+--------------------------------------------------------------------------------------
