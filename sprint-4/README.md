@@ -1,8 +1,7 @@
 # Exercícios
 
 * Pastas com arquivos python para a resolução dos exercícios da trilha Udemy e seus resultados:
-
-[Udemy](exercicios/)
+[Udemy](exercícios/)
 
 
 # README
