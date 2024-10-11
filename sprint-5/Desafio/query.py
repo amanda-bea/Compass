@@ -4,20 +4,10 @@ import boto3
 s3_client = boto3.client('s3')
 
 # Parâmetros da consulta
-bucket_name = 'bucket-entrada-imigrantes'
+bucket_name = 'entrada-imigrantes'
 object_key = 'entrada.csv'
 expression = """
-    SELECT 
-        AVG(CAST(YEAR(data_nascimento) AS INTEGER)) AS media_ano_nascimento,
-        COUNT(*) AS total_registros
-    FROM S3Object
-    WHERE 
-        cidade = 'Rio de Janeiro' AND 
-        status = 'Nada consta'
-    GROUP BY cidade
-    HAVING 
-        media_ano_nascimento > 1800 AND 
-        COUNT(*) > 5
+SELECT * FROM S3Object WHERE sobrenome = 'de Jesus'
 """
 expression_type = 'SQL'
 input_serialization = {
