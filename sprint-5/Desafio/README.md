@@ -3,7 +3,7 @@
 ## Entregáveis
 
 [Arquivo CSV](../Desafio/entrada.csv)
-[Arquivo SQL](../Desafio/query.sql)
+[Resultado CSV](../Desafio/resultado.csv)
 [Código em Python](../Desafio/query.py)
 
 1. **ETAPA 1**

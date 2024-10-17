@@ -19,6 +19,14 @@ Para o desafio foram necessários conhecimentos sobre Python, tratamento de dado
 Continuação do curso de python, dessa vez focado em programação funcional, além de maior foco em conhecimentos técnicos de serviços oferecidos pela AWS.
 O maior foco da sprint foi o uso de Docker do básico ao avançado.
 
+### Sprint 5 
+
+Conclusão do jogo Cloud Quest com a prática de laboratórios para a execução de diversos serviços da AWS. Desafio com foco na prática em escrita de códigos utilizando o boto3 para interação com buckets.
+
+### Sprint 6
+
+Diversos cursos com práticas e conceitos sobre serviços da AWS focados em análise de dados. Desafio com utilização do boto3 com o primeiro passo para o desafio final.
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
@@ -30,3 +38,5 @@ O maior foco da sprint foi o uso de Docker do básico ao avançado.
 [Sprint-4](sprint-4/README.md)
 
 [Sprint-5](sprint-5/README.md)
+
+[Sprint-6](sprint-5/README.md)
