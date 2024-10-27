@@ -27,6 +27,10 @@ Conclusão do jogo Cloud Quest com a prática de laboratórios para a execução
 
 Diversos cursos com práticas e conceitos sobre serviços da AWS focados em análise de dados. Desafio com utilização do boto3 com o primeiro passo para o desafio final.
 
+### Sprint 7
+
+Nessa sprint houve a realização de um curso sobre Spark, com foco em PySpark, Spark-SQL e etc. Para o desafio era necessário conhecimento em docker e AWS para a ingestão de mais arquivos com filmes e séries para o desafio final.
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
@@ -39,4 +43,6 @@ Diversos cursos com práticas e conceitos sobre serviços da AWS focados em aná
 
 [Sprint-5](sprint-5/README.md)
 
-[Sprint-6](sprint-5/README.md)
+[Sprint-6](sprint-6/README.md)
+
+[Sprint-7](sprint-7/README.md)

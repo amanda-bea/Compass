@@ -23,6 +23,7 @@ Criação do bucket data-lake-amanda ainda sem objetos pelo próprio console da 
 2. **ETAPA 2**
 
 Criação do arquivo [bucket.py](../Desafio/bucket.py) com o código que insere os objetos no bucket criado com os arquivos CSV do desafio.
+No código precisei especificar as chaves de acesso para acessar o console dentro do container pelo boto3, já que ele não reconhece as credencias da máquina local.
 
 3. **ETAPA 3**
 

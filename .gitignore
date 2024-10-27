@@ -1,3 +1,5 @@
 .venv
 movies.csv
 series.csv
+apikey.py
+__pycache__
