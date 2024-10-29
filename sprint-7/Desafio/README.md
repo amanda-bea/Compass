@@ -39,3 +39,4 @@ Também foi necessário criar duas camadas no Lambda: Pandas e Requests, as cama
 3. **ETAPA 3**
 
 Criação de uma função do zero, onde foi necessário mudar o tempo e memória para uma melhor execução.
+Com meu código foi necessário rodar separadamente a requisição de séries e filmes para conseguir gerar arquivos separados.
