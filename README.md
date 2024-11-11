@@ -31,6 +31,10 @@ Diversos cursos com práticas e conceitos sobre serviços da AWS focados em aná
 
 Nessa sprint houve a realização de um curso sobre Spark, com foco em PySpark, Spark-SQL e etc. Para o desafio era necessário conhecimento em docker e AWS para a ingestão de mais arquivos com filmes e séries para o desafio final.
 
+### Sprint 8
+
+Foco na realização do desafio final, com a transformação dos filmes e séries que serão utilizados para Parquet alocados na camada Trusted
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
@@ -46,3 +50,5 @@ Nessa sprint houve a realização de um curso sobre Spark, com foco em PySpark, 
 [Sprint-6](sprint-6/README.md)
 
 [Sprint-7](sprint-7/README.md)
+
+[Sprint-8](sprint-8/README.md)
