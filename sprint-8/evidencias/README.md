@@ -45,7 +45,8 @@ Comecei o desafio criando um novo job no Glue com as informações descritas na 
 Para o desafio primeiro criei um código usando Spark para a transformação em parquet de todos os meu dados gerados durante as sprints anteriores, para transformar o CSV foi rápido, mas os arquivos JSON causaram muitos problemas.
 ![primeiro sucesso](./primeiro_sucesso.png)
 
-Como não consegui instalar o apache na minha máquina local demorei algum tempo até entender a estrutura do arquivo json pelo Glue, a maioria dos erros causados eram pelo fato do spark não ler por default múltiplas linhas e os JSON gerados na sprint anterior serem estruturados por listas. Após descobrir isso precisei explodir os arquivos para conseguir transformar em parquet corretamente.
+Como não consegui instalar o apache na minha máquina local demorei algum tempo até entender a estrutura do arquivo json pelo Glue, a maioria dos erros causados eram pelo fato do spark não ler por default múltiplas linhas e os JSON gerados na sprint anterior serem estruturados por listas. Após descobrir isso precisei explodir os arquivos para conseguir transformar em parquet corretamente. O código será mostrado a seguir, junto com o set de leitura de múltiplas linhas no spark, necessário para ler o json.
+![cod](./codigo.png)
 ![ultimo sucesso](./sucesso%20final.png)
 
 Para o tratamento dos dados, por enquanto, apenas selecionei filmes aleátorios, usando a técnica que aprendi nos exercícios, para uma análise mais próxima da realidade usando o spark.
