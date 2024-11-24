@@ -1,5 +1,5 @@
 ## Apresentação
--Oi! Eu sou a Amanda Beatriz, tenho 18 anos e atualmente estou em Campo Grande-MS mas já passei por outros lugares, estudante do segundo semestre de Engenharia de Software na Universidade Federal de Mato Grosso do Sul, UFMS para os íntimos. Sem áreas de interesse definidas ainda, acho o começo importante para descobrir o que você mais gosta de fazer!
+-Oi! Eu sou a Amanda Beatriz, tenho 19 anos e atualmente estou em Campo Grande-MS mas já passei por outros lugares, estudante do segundo semestre de Engenharia de Software na Universidade Federal de Mato Grosso do Sul, UFMS para os íntimos. Sem áreas de interesse definidas ainda, acho o começo importante para descobrir o que você mais gosta de fazer!
 
 ## Aprendizado
 
@@ -35,6 +35,10 @@ Nessa sprint houve a realização de um curso sobre Spark, com foco em PySpark, 
 
 Foco na realização do desafio final, com a transformação dos filmes e séries que serão utilizados para Parquet alocados na camada Trusted
 
+### Sprint 9
+
+última etapa de preparação dos dados para o desafio final, nessa sprint preparei todos os dados para fazer apenas a visualização anteriormente. Uma camada Refined foi criada no data-lake usando PySpark dentro do Glue.
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
@@ -52,3 +56,5 @@ Foco na realização do desafio final, com a transformação dos filmes e série
 [Sprint-7](sprint-7/README.md)
 
 [Sprint-8](sprint-8/README.md)
+
+[Sprint-9](sprint-9/README.md)

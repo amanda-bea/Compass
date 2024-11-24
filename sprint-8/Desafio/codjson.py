@@ -19,6 +19,7 @@ job.init(args['JOB_NAME'], args)
 bucket_name = 'data-lake-amanda'
 prefix_filmes = 'Raw/TMDB/JSON/2024/10/26/media_filmes'
 prefix_series = 'Raw/TMDB/JSON/2024/10/26/media_series'
+prefix_novof = 'Raw/TMDB/JSON/2024/10/26/novo_filmes'
 
 # Obter data para saída
 data_atual = datetime.now()
@@ -31,7 +32,10 @@ saida1 = f"s3a://{bucket_name}/Trusted/TMDB/PARQUET/Movies/{ano}/{mes}/{dia}/fil
 saida2 = f"s3a://{bucket_name}/Trusted/TMDB/PARQUET/Series/{ano}/{mes}/{dia}/series.parquet"
 
 # Set para ler múltiplas linhas
-df_filmes = spark.read.option("multiline", "true").json(f"s3a://{bucket_name}/{prefix_filmes}*")
+df_filmesa = spark.read.option("multiline", "true").json(f"s3a://{bucket_name}/{prefix_filmes}*")
+df_novos_filmes = spark.read.option("multiline", "true").json(f"s3a://{bucket_name}/{prefix_novof}*")
+
+df_filmes = df_filmesa.union(df_novos_filmes)
 
 # Explodir filmes usando o spark
 df_filmes_explodido = df_filmes.selectExpr("explode(filmes) as filme")
@@ -47,7 +51,8 @@ df_filmes_final = df_filmes_explodido.select(
     col("filme.release_date"),
     col("filme.title"),
     col("filme.vote_average"),
-    col("filme.vote_count")
+    col("filme.vote_count"),
+    col("filme.revenue")
 )
 
 # Mesmo processo para séries
