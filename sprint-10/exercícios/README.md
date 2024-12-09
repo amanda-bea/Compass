@@ -1,0 +1,3 @@
+## Exercícios
+
+Sprint sem exercícios.

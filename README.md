@@ -39,6 +39,10 @@ Foco na realização do desafio final, com a transformação dos filmes e série
 
 última etapa de preparação dos dados para o desafio final, nessa sprint preparei todos os dados para fazer apenas a visualização anteriormente. Uma camada Refined foi criada no data-lake usando PySpark dentro do Glue.
 
+### Sprint 10
+
+Etapa final do desafio, com foco na preparação da visualização de dados usando o AWS QuickSight.
+
 ## Sprints
 
 [Sprint-1](sprint-1/README.md)
@@ -58,3 +62,5 @@ Foco na realização do desafio final, com a transformação dos filmes e série
 [Sprint-8](sprint-8/README.md)
 
 [Sprint-9](sprint-9/README.md)
+
+[Sprint-10](sprint-9/README.md)
